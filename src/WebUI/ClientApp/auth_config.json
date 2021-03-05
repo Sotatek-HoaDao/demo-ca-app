@@ -1,0 +1,6 @@
+{
+  "domain": "sotatek-hoadao.us.auth0.com",
+  "clientId": "TqKCLmnI1OOiloxc42PZn3Bu9i86a3ZZ",
+  "audience": "https://express.sample",
+  "serverUrl": "http://localhost:6060"
+}

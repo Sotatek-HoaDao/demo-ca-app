@@ -1,0 +1,59 @@
+<div class="movie-list-panel">
+  <div class="movie-list-header">
+    <h1>IMDB Style Movie CRUD with Rest API</h1>
+  </div>
+
+  <div class="container text-center">
+    <div class="btn-add-new">
+      <button mat-fab  mat-flat-button color="primary">
+        <mat-icon mat-icon-button color="warn">add</mat-icon>
+      </button>
+    </div>
+
+    <table mat-table [dataSource]="movies" #mytable class="my-table mat-elevation-z8">
+      <!-- id column -->
+      <ng-container [matColumnDef]="'id'">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- name column -->
+      <ng-container [matColumnDef]="'name'">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- description column -->
+      <ng-container [matColumnDef]="'description'">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <!-- description column -->
+      <ng-container [matColumnDef]="'duration'">
+        <th mat-header-cell *matHeaderCellDef>Duration (mins)</th>
+        <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="'actions'">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="edit(element)">
+            <mat-icon mat-icon-button color='primary'>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="delete(element['id'])">
+            <mat-icon mat-icon-button color="warn">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+    </table>
+
+    <mat-paginator [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
+
+  </div>
+</div>
+

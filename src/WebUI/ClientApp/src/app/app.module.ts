@@ -1,49 +1,83 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { TodoComponent } from './todo/todo.component';
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { FooterComponent } from './components/footer/footer.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from '../environments/environment';
+import { LoadingComponent } from './components/loading/loading.component';
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { HomeContentComponent } from './components/home-content/home-content.component';
+import { HomeComponent } from './pages/home/home.component';
+import { MoviesComponent } from './pages/movies/movies.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { RatingComponent } from './pages/rating/rating.component';
+import { RatingListComponent } from './components/rating-list/rating-list.component';
+import { MainNaviComponent } from './components/main-navi/main-navi.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ComnfirmDialogComponent } from './components/comnfirm-dialog/comnfirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MovieFormDialogComponent } from './components/movie-form-dialog/movie-form-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
+    FooterComponent,
+    LoadingComponent,
+    AuthenticationButtonComponent,
+    LoginButtonComponent,
+    LogoutButtonComponent,
+    HomeContentComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    TodoComponent
+    MoviesComponent,
+    MovieListComponent,
+    ProfileComponent,
+    RatingComponent,
+    RatingListComponent,
+    MainNaviComponent,
+    ComnfirmDialogComponent,
+    MovieFormDialogComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    FontAwesomeModule,
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
-    ]),
+    BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    ModalModule.forRoot()
+    // 👇 update AuthModule
+    AuthModule.forRoot({
+      ...env.auth,
+      httpInterceptor: {
+        allowedList: [`${env.dev.serverUrl}/api/messages/protected-message`],
+      },}),
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-  ],
+  providers: [],
+  entryComponents: [ComnfirmDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
