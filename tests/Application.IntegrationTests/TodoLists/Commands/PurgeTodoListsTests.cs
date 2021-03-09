@@ -53,24 +53,24 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         {
             await RunAsAdministratorAsync();
 
-            await SendAsync(new CreateTodoListCommand
+            await SendAsync(new CreateMovieCommand
             {
                 Title = "New List #1"
             });
 
-            await SendAsync(new CreateTodoListCommand
+            await SendAsync(new CreateMovieCommand
             {
                 Title = "New List #2"
             });
 
-            await SendAsync(new CreateTodoListCommand
+            await SendAsync(new CreateMovieCommand
             {
                 Title = "New List #3"
             });
 
             await SendAsync(new PurgeTodoListsCommand());
 
-            var count = await CountAsync<TodoList>();
+            var count = await CountAsync<Movie>();
 
             count.Should().Be(0);
         }

@@ -7,9 +7,9 @@ namespace demo_ca_app.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<TodoList> TodoLists { get; set; }
+        DbSet<Movie> Movies { get; set; }
 
-        DbSet<TodoItem> TodoItems { get; set; }
+        DbSet<Rating> Ratings { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

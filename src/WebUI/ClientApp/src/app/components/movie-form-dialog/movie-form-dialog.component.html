@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Edit Movie</h1>
+<h1 mat-dialog-title>{{title}}</h1>
 <div mat-dialog-content>
   <form [formGroup]="formInstance">
     <div class="mt-1">
@@ -26,8 +26,10 @@
 
   </form>
 </div>
-<div class="mt-5" mat-dialog-actions>
+<div class="mt-5 flex-justify-center" mat-dialog-actions >
   <button mat-raised-button color="primary" [disabled]="formInstance.dirty && (formInstance.errors!=null)" (click)="save()"
-    cdkFocusInitial>Yes</button>
-  <button mat-raised-button mat-dialog-close>No</button>
+    cdkFocusInitial>
+    Save
+  </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
 </div>

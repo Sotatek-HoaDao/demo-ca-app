@@ -5,12 +5,12 @@
 
   <div class="container text-center">
     <div class="btn-add-new">
-      <button mat-fab  mat-flat-button color="primary">
+      <button mat-fab  mat-flat-button color="primary" (click)="add()">
         <mat-icon mat-icon-button color="warn">add</mat-icon>
       </button>
     </div>
 
-    <table mat-table [dataSource]="movies" #mytable class="my-table mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
       <!-- id column -->
       <ng-container [matColumnDef]="'id'">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -51,8 +51,7 @@
 
     </table>
 
-    <mat-paginator [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
   </div>
 </div>

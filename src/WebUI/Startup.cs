@@ -5,6 +5,7 @@ using demo_ca_app.Infrastructure.Persistence;
 using demo_ca_app.WebUI.Filters;
 using demo_ca_app.WebUI.Services;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,13 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
+//using NSwag;
+//using NSwag.Generation.Processors.Security;
 using System.Linq;
+using System.Security.Claims;
 
 namespace demo_ca_app.WebUI
 {
@@ -47,6 +52,7 @@ namespace demo_ca_app.WebUI
                     .AddFluentValidation();
 
             services.AddRazorPages();
+            //services.AddControllers(options => options.EnableEndpointRouting = false);
 
             // Customise default API behaviour
             services.Configure<ApiBehaviorOptions>(options =>
@@ -73,6 +79,7 @@ namespace demo_ca_app.WebUI
 
                 configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,7 +114,7 @@ namespace demo_ca_app.WebUI
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseIdentityServer();
+            //app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

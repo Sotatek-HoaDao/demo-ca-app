@@ -1,6 +1,6 @@
 ﻿using demo_ca_app.Application.Common.Exceptions;
 using demo_ca_app.Application.TodoItems.Commands.CreateTodoItem;
-using demo_ca_app.Application.TodoLists.Commands.CreateTodoList;
+using demo_ca_app.Application.Movies.Commands.CreateMovie;
 using demo_ca_app.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
@@ -16,7 +16,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoItems.Commands
         [Test]
         public void ShouldRequireMinimumFields()
         {
-            var command = new CreateTodoItemCommand();
+            var command = new CreateRatingCommand();
 
             FluentActions.Invoking(() =>
                 SendAsync(command)).Should().Throw<ValidationException>();
@@ -27,12 +27,12 @@ namespace demo_ca_app.Application.IntegrationTests.TodoItems.Commands
         {
             var userId = await RunAsDefaultUserAsync();
 
-            var listId = await SendAsync(new CreateTodoListCommand
+            var listId = await SendAsync(new CreateMovieCommand
             {
-                Title = "New List"
+                Name = "New List"
             });
 
-            var command = new CreateTodoItemCommand
+            var command = new CreateRatingCommand
             {
                 ListId = listId,
                 Title = "Tasks"
@@ -40,11 +40,11 @@ namespace demo_ca_app.Application.IntegrationTests.TodoItems.Commands
 
             var itemId = await SendAsync(command);
 
-            var item = await FindAsync<TodoItem>(itemId);
+            var item = await FindAsync<Rating>(itemId);
 
             item.Should().NotBeNull();
-            item.ListId.Should().Be(command.ListId);
-            item.Title.Should().Be(command.Title);
+            item.MovieId.Should().Be(command.ListId);
+            item.MovieName.Should().Be(command.Title);
             item.CreatedBy.Should().Be(userId);
             item.Created.Should().BeCloseTo(DateTime.Now, 10000);
             item.LastModifiedBy.Should().BeNull();

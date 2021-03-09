@@ -19,7 +19,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoItems.Commands
         [Test]
         public void ShouldRequireValidTodoItemId()
         {
-            var command = new UpdateTodoItemCommand
+            var command = new UpdateRatingCommand
             {
                 Id = 99,
                 Title = "New Title"
@@ -34,12 +34,12 @@ namespace demo_ca_app.Application.IntegrationTests.TodoItems.Commands
         {
             var userId = await RunAsDefaultUserAsync();
 
-            var listId = await SendAsync(new CreateTodoListCommand
+            var listId = await SendAsync(new CreateMovieCommand
             {
                 Title = "New List"
             });
 
-            var itemId = await SendAsync(new CreateTodoItemCommand
+            var itemId = await SendAsync(new CreateRatingCommand
             {
                 ListId = listId,
                 Title = "New Item"

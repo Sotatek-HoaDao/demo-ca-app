@@ -30,7 +30,7 @@ namespace demo_ca_app.Application.UnitTests.Common.Mappings
         }
         
         [Test]
-        [TestCase(typeof(TodoList), typeof(TodoListDto))]
+        [TestCase(typeof(Movie), typeof(MoviesDto))]
         [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {

@@ -25,7 +25,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Queries
         [Test]
         public async Task ShouldReturnAllListsAndItems()
         {
-            await AddAsync(new TodoList
+            await AddAsync(new Movie
             {
                 Title = "Shopping",
                 Colour = Colour.Blue,

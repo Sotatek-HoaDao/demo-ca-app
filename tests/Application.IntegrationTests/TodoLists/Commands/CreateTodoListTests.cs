@@ -15,7 +15,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         [Test]
         public void ShouldRequireMinimumFields()
         {
-            var command = new CreateTodoListCommand();
+            var command = new CreateMovieCommand();
 
             FluentActions.Invoking(() =>
                 SendAsync(command)).Should().Throw<ValidationException>();
@@ -24,12 +24,12 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         [Test]
         public async Task ShouldRequireUniqueTitle()
         {
-            await SendAsync(new CreateTodoListCommand
+            await SendAsync(new CreateMovieCommand
             {
                 Title = "Shopping"
             });
 
-            var command = new CreateTodoListCommand
+            var command = new CreateMovieCommand
             {
                 Title = "Shopping"
             };
@@ -43,14 +43,14 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         {
             var userId = await RunAsDefaultUserAsync();
 
-            var command = new CreateTodoListCommand
+            var command = new CreateMovieCommand
             {
                 Title = "Tasks"
             };
 
             var id = await SendAsync(command);
 
-            var list = await FindAsync<TodoList>(id);
+            var list = await FindAsync<Movie>(id);
 
             list.Should().NotBeNull();
             list.Title.Should().Be(command.Title);

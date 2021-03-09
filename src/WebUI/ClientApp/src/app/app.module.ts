@@ -33,6 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MovieFormDialogComponent } from './components/movie-form-dialog/movie-form-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthModule.forRoot({
       ...env.auth,
       httpInterceptor: {
-        allowedList: [`${env.dev.serverUrl}/api/messages/protected-message`],
+        allowedList: [`${env.dev.serverUrl}/api/movies/`],
       },}),
     LayoutModule,
     MatToolbarModule,
@@ -74,9 +77,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+],
   entryComponents: [ComnfirmDialogComponent],
   bootstrap: [AppComponent]
 })

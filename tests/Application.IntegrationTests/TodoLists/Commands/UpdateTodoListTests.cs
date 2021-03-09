@@ -29,12 +29,12 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         [Test]
         public async Task ShouldRequireUniqueTitle()
         {
-            var listId = await SendAsync(new CreateTodoListCommand
+            var listId = await SendAsync(new CreateMovieCommand
             {
                 Title = "New List"
             });
 
-            await SendAsync(new CreateTodoListCommand
+            await SendAsync(new CreateMovieCommand
             {
                 Title = "Other List"
             });
@@ -56,7 +56,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         {
             var userId = await RunAsDefaultUserAsync();
 
-            var listId = await SendAsync(new CreateTodoListCommand
+            var listId = await SendAsync(new CreateMovieCommand
             {
                 Title = "New List"
             });
@@ -69,7 +69,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
 
             await SendAsync(command);
 
-            var list = await FindAsync<TodoList>(listId);
+            var list = await FindAsync<Movie>(listId);
 
             list.Title.Should().Be(command.Title);
             list.LastModifiedBy.Should().NotBeNull();

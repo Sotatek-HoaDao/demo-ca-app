@@ -16,14 +16,13 @@ namespace demo_ca_app.Application.Common.Behaviours
 
         public PerformanceBehaviour(
             ILogger<TRequest> logger, 
-            ICurrentUserService currentUserService,
-            IIdentityService identityService)
+            ICurrentUserService currentUserService)
         {
             _timer = new Stopwatch();
 
             _logger = logger;
             _currentUserService = currentUserService;
-            _identityService = identityService;
+            //_identityService = identityService;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -44,7 +43,7 @@ namespace demo_ca_app.Application.Common.Behaviours
 
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    userName = await _identityService.GetUserNameAsync(userId);
+                    //userName = await _identityService.GetUserNameAsync(userId);
                 }
 
                 _logger.LogWarning("demo_ca_app Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",

@@ -1,6 +1,6 @@
 ﻿using demo_ca_app.Application.Common.Exceptions;
-using demo_ca_app.Application.TodoLists.Commands.CreateTodoList;
-using demo_ca_app.Application.TodoLists.Commands.DeleteTodoList;
+using demo_ca_app.Application.Movies.Commands.CreateMovie;
+using demo_ca_app.Application.Movies.Commands.DeleteMovie;
 using demo_ca_app.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
@@ -15,7 +15,7 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         [Test]
         public void ShouldRequireValidTodoListId()
         {
-            var command = new DeleteTodoListCommand { Id = 99 };
+            var command = new DeleteMovieCommand { Id = 99 };
 
             FluentActions.Invoking(() =>
                 SendAsync(command)).Should().Throw<NotFoundException>();
@@ -24,17 +24,17 @@ namespace demo_ca_app.Application.IntegrationTests.TodoLists.Commands
         [Test]
         public async Task ShouldDeleteTodoList()
         {
-            var listId = await SendAsync(new CreateTodoListCommand
+            var listId = await SendAsync(new CreateMovieCommand
             {
-                Title = "New List"
+                Name = "New List"
             });
 
-            await SendAsync(new DeleteTodoListCommand 
+            await SendAsync(new DeleteMovieCommand
             { 
                 Id = listId 
             });
 
-            var list = await FindAsync<TodoList>(listId);
+            var list = await FindAsync<Movie>(listId);
 
             list.Should().BeNull();
         }

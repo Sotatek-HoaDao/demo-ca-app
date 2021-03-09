@@ -30,26 +30,29 @@ namespace demo_ca_app.Infrastructure.Persistence
         public static async Task SeedSampleDataAsync(ApplicationDbContext context)
         {
             // Seed, if necessary
-            if (!context.TodoLists.Any())
+            if (!context.Movies.Any())
             {
-                context.TodoLists.Add(new TodoList
-                {
-                    Title = "Shopping",
-                    Colour = Colour.Blue,
-                    Items =
-                    {
-                        new TodoItem { Title = "Apples", Done = true },
-                        new TodoItem { Title = "Milk", Done = true },
-                        new TodoItem { Title = "Bread", Done = true },
-                        new TodoItem { Title = "Toilet paper" },
-                        new TodoItem { Title = "Pasta" },
-                        new TodoItem { Title = "Tissues" },
-                        new TodoItem { Title = "Tuna" },
-                        new TodoItem { Title = "Water" }
-                    }
-                });
+                context.Movies.Add(new Movie { Name = "Movie1", Description = "Description1", Duration = 120 });
+                context.Movies.Add(new Movie { Name = "Movie2", Description = "Description2", Duration = 121 });
+                context.Movies.Add(new Movie { Name = "Movie3", Description = "Description3", Duration = 122 });
+                context.Movies.Add(new Movie { Name = "Movie4", Description = "Description4", Duration = 123 });
+                context.Movies.Add(new Movie { Name = "Movie5", Description = "Description5", Duration = 124 });
+                context.Movies.Add(new Movie { Name = "Movie6", Description = "Description6", Duration = 125 });
+                context.Movies.Add(new Movie { Name = "Movie7", Description = "Description7", Duration = 126 });
+                context.Movies.Add(new Movie { Name = "Movie8", Description = "Description7", Duration = 127 });
+                context.Movies.Add(new Movie { Name = "Movie9", Description = "Description7", Duration = 128 });
+                context.Movies.Add(new Movie { Name = "Movie10", Description = "Description7", Duration = 129 });
 
                 await context.SaveChangesAsync();
+            }
+
+            if (!context.Ratings.Any())
+            {
+                context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 1", RatingPoint=1, UserMail="user1@mail.com" });
+                context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 2", RatingPoint=2, UserMail="user2@mail.com" });
+                context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 3", RatingPoint=3, UserMail="user3@mail.com" });
+                context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 4", RatingPoint=4, UserMail="user4@mail.com" });
+                context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 5", RatingPoint=5, UserMail="user5@mail.com" });
             }
         }
     }

@@ -31,9 +31,9 @@ namespace demo_ca_app.Infrastructure.Persistence
             _dateTime = dateTime;
         }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
-        public DbSet<TodoList> TodoLists { get; set; }
+        public DbSet<Movie> Movies { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

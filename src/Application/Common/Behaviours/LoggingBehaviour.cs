@@ -12,11 +12,11 @@ namespace demo_ca_app.Application.Common.Behaviours
         private readonly ICurrentUserService _currentUserService;
         private readonly IIdentityService _identityService;
 
-        public LoggingBehaviour(ILogger<TRequest> logger, ICurrentUserService currentUserService, IIdentityService identityService)
+        public LoggingBehaviour(ILogger<TRequest> logger, ICurrentUserService currentUserService)
         {
             _logger = logger;
             _currentUserService = currentUserService;
-            _identityService = identityService;
+            //_identityService = identityService;
         }
 
         public async Task Process(TRequest request, CancellationToken cancellationToken)
@@ -27,7 +27,7 @@ namespace demo_ca_app.Application.Common.Behaviours
 
             if (!string.IsNullOrEmpty(userId))
             {
-                userName = await _identityService.GetUserNameAsync(userId);
+                //userName = await _identityService.GetUserNameAsync(userId);
             }
 
             _logger.LogInformation("demo_ca_app Request: {Name} {@UserId} {@UserName} {@Request}",
