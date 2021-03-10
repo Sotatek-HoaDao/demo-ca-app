@@ -3,7 +3,7 @@ using demo_ca_app.Application.Ratings.Commands.CreateRating;
 using demo_ca_app.Application.Ratings.Commands.DeleteRating;
 using demo_ca_app.Application.Ratings.Commands.UpdateRating;
 using demo_ca_app.Application.Ratings.Commands.UpdateRatingDetail;
-using demo_ca_app.Application.Ratings.Queries.GetRatingWithPagination;
+using demo_ca_app.Application.Ratings.Queries.GetRatings;
 using demo_ca_app.Application.Movies.Queries.GetMovies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace demo_ca_app.WebUI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class RatingsController : ApiControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<PaginatedList<RatingDto>>> GetRatingWithPagination([FromQuery] GetRatingWithPaginationQuery query)
+        public async Task<ActionResult<RatingsVm>> Get()
         {
-            return await Mediator.Send(query);
+            return await Mediator.Send(new GetRatingsQuery());
         }
 
         [HttpPost]

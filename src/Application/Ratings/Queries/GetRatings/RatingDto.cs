@@ -2,7 +2,7 @@
 using demo_ca_app.Application.Common.Mappings;
 using demo_ca_app.Domain.Entities;
 
-namespace demo_ca_app.Application.Movies.Queries.GetMovies
+namespace demo_ca_app.Application.Ratings.Queries.GetRatings
 {
     public class RatingDto : IMapFrom<Rating>
     {
@@ -18,10 +18,5 @@ namespace demo_ca_app.Application.Movies.Queries.GetMovies
 
         public string UserMail { get; set; }
 
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<Rating, RatingDto>()
-                .ForMember(d => d.RatingPoint, opt => opt.MapFrom(s => (int)s.RatingPoint));
-        }
     }
 }

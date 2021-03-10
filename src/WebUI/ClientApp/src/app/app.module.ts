@@ -25,17 +25,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ComnfirmDialogComponent } from './components/comnfirm-dialog/comnfirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MovieFormDialogComponent } from './components/movie-form-dialog/movie-form-dialog.component';
+import { RatingFormDialogComponent } from './components/rating-form-dialog/rating-form-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+// graphql
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
     RatingListComponent,
     MainNaviComponent,
     ComnfirmDialogComponent,
-    MovieFormDialogComponent
+    MovieFormDialogComponent,
+    RatingFormDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +82,9 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
     MatDialogModule,
     ReactiveFormsModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    // For using graphql
+    GraphQLModule
   ],
   providers: [
     {

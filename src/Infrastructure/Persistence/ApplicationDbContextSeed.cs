@@ -53,6 +53,8 @@ namespace demo_ca_app.Infrastructure.Persistence
                 context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 3", RatingPoint=3, UserMail="user3@mail.com" });
                 context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 4", RatingPoint=4, UserMail="user4@mail.com" });
                 context.Ratings.Add(new Rating { MovieId = 1, MovieName = "Movie1", Comment="comment user 5", RatingPoint=5, UserMail="user5@mail.com" });
+
+                await context.SaveChangesAsync();
             }
         }
     }

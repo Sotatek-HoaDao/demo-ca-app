@@ -238,7 +238,7 @@ export class MoviesClient implements IMoviesClient {
 }
 
 export interface IRatingsClient {
-    getRatingWithPagination(listId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<PaginatedListOfRatingDto>;
+    get(): Observable<RatingsVm>;
     create(command: CreateRatingCommand): Observable<number>;
     update(id: number, command: UpdateRatingCommand): Observable<FileResponse>;
     delete(id: number): Observable<FileResponse>;
@@ -258,20 +258,8 @@ export class RatingsClient implements IRatingsClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getRatingWithPagination(listId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<PaginatedListOfRatingDto> {
-        let url_ = this.baseUrl + "/api/Ratings?";
-        if (listId === null)
-            throw new Error("The parameter 'listId' cannot be null.");
-        else if (listId !== undefined)
-            url_ += "ListId=" + encodeURIComponent("" + listId) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+    get(): Observable<RatingsVm> {
+        let url_ = this.baseUrl + "/api/Ratings";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -283,20 +271,20 @@ export class RatingsClient implements IRatingsClient {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetRatingWithPagination(response_);
+            return this.processGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetRatingWithPagination(<any>response_);
+                    return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<PaginatedListOfRatingDto>><any>_observableThrow(e);
+                    return <Observable<RatingsVm>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<PaginatedListOfRatingDto>><any>_observableThrow(response_);
+                return <Observable<RatingsVm>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetRatingWithPagination(response: HttpResponseBase): Observable<PaginatedListOfRatingDto> {
+    protected processGet(response: HttpResponseBase): Observable<RatingsVm> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -307,7 +295,7 @@ export class RatingsClient implements IRatingsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginatedListOfRatingDto.fromJS(resultData200);
+            result200 = RatingsVm.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -315,7 +303,7 @@ export class RatingsClient implements IRatingsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PaginatedListOfRatingDto>(<any>null);
+        return _observableOf<RatingsVm>(<any>null);
     }
 
     create(command: CreateRatingCommand): Observable<number> {
@@ -711,15 +699,10 @@ export interface IUpdateMovieCommand {
     duration?: number;
 }
 
-export class PaginatedListOfRatingDto implements IPaginatedListOfRatingDto {
-    items?: RatingDto[] | undefined;
-    pageIndex?: number;
-    totalPages?: number;
-    totalCount?: number;
-    hasPreviousPage?: boolean;
-    hasNextPage?: boolean;
+export class RatingsVm implements IRatingsVm {
+    lists?: RatingDto[] | undefined;
 
-    constructor(data?: IPaginatedListOfRatingDto) {
+    constructor(data?: IRatingsVm) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -730,49 +713,34 @@ export class PaginatedListOfRatingDto implements IPaginatedListOfRatingDto {
 
     init(_data?: any) {
         if (_data) {
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(RatingDto.fromJS(item));
+            if (Array.isArray(_data["lists"])) {
+                this.lists = [] as any;
+                for (let item of _data["lists"])
+                    this.lists!.push(RatingDto.fromJS(item));
             }
-            this.pageIndex = _data["pageIndex"];
-            this.totalPages = _data["totalPages"];
-            this.totalCount = _data["totalCount"];
-            this.hasPreviousPage = _data["hasPreviousPage"];
-            this.hasNextPage = _data["hasNextPage"];
         }
     }
 
-    static fromJS(data: any): PaginatedListOfRatingDto {
+    static fromJS(data: any): RatingsVm {
         data = typeof data === 'object' ? data : {};
-        let result = new PaginatedListOfRatingDto();
+        let result = new RatingsVm();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
+        if (Array.isArray(this.lists)) {
+            data["lists"] = [];
+            for (let item of this.lists)
+                data["lists"].push(item.toJSON());
         }
-        data["pageIndex"] = this.pageIndex;
-        data["totalPages"] = this.totalPages;
-        data["totalCount"] = this.totalCount;
-        data["hasPreviousPage"] = this.hasPreviousPage;
-        data["hasNextPage"] = this.hasNextPage;
         return data; 
     }
 }
 
-export interface IPaginatedListOfRatingDto {
-    items?: RatingDto[] | undefined;
-    pageIndex?: number;
-    totalPages?: number;
-    totalCount?: number;
-    hasPreviousPage?: boolean;
-    hasNextPage?: boolean;
+export interface IRatingsVm {
+    lists?: RatingDto[] | undefined;
 }
 
 export class RatingDto implements IRatingDto {

@@ -1,5 +1,5 @@
 ﻿using demo_ca_app.Application.Common.Exceptions;
-using demo_ca_app.Application.TodoItems.Commands.CreateTodoItem;
+using demo_ca_app.Application.Ratings.Commands.CreateRating;
 using demo_ca_app.Application.Movies.Commands.CreateMovie;
 using demo_ca_app.Domain.Entities;
 using FluentAssertions;

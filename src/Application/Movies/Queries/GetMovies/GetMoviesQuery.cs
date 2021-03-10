@@ -16,12 +16,12 @@ namespace demo_ca_app.Application.Movies.Queries.GetMovies
     {
     }
 
-    public class GetTodosQueryHandler : IRequestHandler<GetMoviesQuery, MoviesVm>
+    public class GetMoviesQueryHandler : IRequestHandler<GetMoviesQuery, MoviesVm>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetTodosQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetMoviesQueryHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -34,7 +34,7 @@ namespace demo_ca_app.Application.Movies.Queries.GetMovies
                 Lists = await _context.Movies
                     .AsNoTracking()
                     .ProjectTo<MovieDto>(_mapper.ConfigurationProvider)
-                    .OrderBy(t => t.Name)
+                    .OrderBy(t => t.Id)
                     .ToListAsync(cancellationToken)
             };
         }

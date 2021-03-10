@@ -4,6 +4,8 @@ using demo_ca_app.Infrastructure;
 using demo_ca_app.Infrastructure.Persistence;
 using demo_ca_app.WebUI.Filters;
 using demo_ca_app.WebUI.Services;
+using demo_ca_app.Application.GraphQL.GraphQLSchema;
+
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +22,7 @@ using NSwag.Generation.Processors.Security;
 //using NSwag.Generation.Processors.Security;
 using System.Linq;
 using System.Security.Claims;
+using GraphQL.Server.Ui.Playground;
 
 namespace demo_ca_app.WebUI
 {
@@ -116,6 +119,11 @@ namespace demo_ca_app.WebUI
             app.UseAuthentication();
             //app.UseIdentityServer();
             app.UseAuthorization();
+
+            // Graphql configuration.
+            app.UseGraphQL<RatingSchema>();
+            app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

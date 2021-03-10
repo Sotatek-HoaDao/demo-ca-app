@@ -1,6 +1,6 @@
 ﻿using demo_ca_app.Application.Common.Behaviours;
 using demo_ca_app.Application.Common.Interfaces;
-using demo_ca_app.Application.TodoItems.Commands.CreateTodoItem;
+using demo_ca_app.Application.Ratings.Commands.CreateRating;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
