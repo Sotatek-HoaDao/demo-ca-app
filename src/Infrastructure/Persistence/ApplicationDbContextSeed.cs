@@ -1,5 +1,4 @@
 ﻿using demo_ca_app.Domain.Entities;
-using demo_ca_app.Domain.ValueObjects;
 using demo_ca_app.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;

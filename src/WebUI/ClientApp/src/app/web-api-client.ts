@@ -888,7 +888,7 @@ export class UpdateRatingDetailCommand implements IUpdateRatingDetailCommand {
     movieId?: number;
     movieName?: string | undefined;
     comment?: string | undefined;
-    ratingPoint?: RatingLevel;
+    ratingPoint?: number;
     userMail?: string | undefined;
 
     constructor(data?: IUpdateRatingDetailCommand) {
@@ -935,15 +935,8 @@ export interface IUpdateRatingDetailCommand {
     movieId?: number;
     movieName?: string | undefined;
     comment?: string | undefined;
-    ratingPoint?: RatingLevel;
+    ratingPoint?: number;
     userMail?: string | undefined;
-}
-
-export enum RatingLevel {
-    None = 0,
-    Low = 1,
-    Medium = 2,
-    High = 3,
 }
 
 export interface FileResponse {

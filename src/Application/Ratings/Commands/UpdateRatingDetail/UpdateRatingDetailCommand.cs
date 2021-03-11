@@ -17,7 +17,7 @@ namespace demo_ca_app.Application.Ratings.Commands.UpdateRatingDetail
         public string MovieName { get; set; }
 
         public string Comment { get; set; }
-        public RatingLevel RatingPoint { get; set; }
+        public int RatingPoint { get; set; }
         public string UserMail { get; set; }
     }
 

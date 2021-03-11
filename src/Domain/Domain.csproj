@@ -6,4 +6,9 @@
     <AssemblyName>demo_ca_app.Domain</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="ValueObjects\" />
+  </ItemGroup>
+
 </Project>

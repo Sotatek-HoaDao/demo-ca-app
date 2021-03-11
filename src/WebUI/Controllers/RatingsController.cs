@@ -11,7 +11,11 @@ using System.Threading.Tasks;
 
 namespace demo_ca_app.WebUI.Controllers
 {
-    //[Authorize]
+    /// <summary>
+    /// This controller is kept to generate dto object
+    /// </summary>
+    [Authorize]
+    [Authorize("read:ratings")]
     public class RatingsController : ApiControllerBase
     {
         [HttpGet]

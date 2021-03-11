@@ -170,7 +170,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -201,7 +206,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Ratings/{id}": {
@@ -246,7 +256,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -277,7 +292,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Ratings/UpdateRatingDetails": {
@@ -321,7 +341,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     }
   },
@@ -497,29 +522,14 @@
             "nullable": true
           },
           "ratingPoint": {
-            "$ref": "#/components/schemas/RatingLevel"
+            "type": "integer",
+            "format": "int32"
           },
           "userMail": {
             "type": "string",
             "nullable": true
           }
         }
-      },
-      "RatingLevel": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "None",
-          "Low",
-          "Medium",
-          "High"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ]
       }
     },
     "securitySchemes": {

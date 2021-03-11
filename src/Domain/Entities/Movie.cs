@@ -1,6 +1,4 @@
 ﻿using demo_ca_app.Domain.Common;
-using demo_ca_app.Domain.ValueObjects;
-using System.Collections.Generic;
 
 namespace demo_ca_app.Domain.Entities
 {
