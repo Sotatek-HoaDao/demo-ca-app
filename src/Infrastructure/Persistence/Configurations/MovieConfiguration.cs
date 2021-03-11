@@ -16,8 +16,6 @@ namespace demo_ca_app.Infrastructure.Persistence.Configurations
                 .IsRequired();
             builder.Property(t => t.Duration)
                             .IsRequired();
-
-
         }
     }
 }

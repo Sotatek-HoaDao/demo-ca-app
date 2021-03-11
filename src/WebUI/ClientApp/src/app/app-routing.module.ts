@@ -4,6 +4,7 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
 import { MoviesComponent } from 'src/app/pages/movies/movies.component';
 import { RatingComponent } from 'src/app/pages/rating/rating.component';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   {
@@ -14,17 +15,17 @@ const routes: Routes = [
   {
     path: 'movie',
     component: MoviesComponent,
-    pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
     path: 'rating',
     component: RatingComponent,
-    pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
-    pathMatch: 'full',
+    canActivate: [AuthGuard],
   }
 ];
 

@@ -55,7 +55,6 @@ namespace demo_ca_app.WebUI
                     .AddFluentValidation();
 
             services.AddRazorPages();
-            //services.AddControllers(options => options.EnableEndpointRouting = false);
 
             // Customise default API behaviour
             services.Configure<ApiBehaviorOptions>(options =>
