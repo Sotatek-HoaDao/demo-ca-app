@@ -17,3 +17,22 @@ https://www.youtube.com/watch?v=5OtUm1BLmG0
 - Use Material Design by Google - https://material.io/
 
 - Unit Test (NUnit)
+
+## Some settings:
+- Auth0
+  + Authorize API at BE: WebUI\appsettings.json
+  ```
+    "Auth0": {
+        "Domain": "registered auth0's domain",
+        "Audience": "registered auth0's api identity"
+    }
+   ```
+  + Authn & Authz at FE: WebUI\ClientApp\auth_config.json
+  ```
+    {
+      "domain": "registered auth0's domain",
+      "clientId": "clientId - get from auth0",
+      "audience": "registered auth0's api identity",
+      "serverUrl": "url of web server (ex: https://localhost:44312)"
+    }
+   ```
