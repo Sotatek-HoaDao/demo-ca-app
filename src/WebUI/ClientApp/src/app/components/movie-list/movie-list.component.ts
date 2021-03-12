@@ -8,6 +8,8 @@ import {MovieFormDialogComponent} from '../movie-form-dialog/movie-form-dialog.c
 import {
   MoviesVm, MoviesClient, MovieDto, CreateMovieCommand, UpdateMovieCommand
 } from '../../web-api-client';
+import { HttpClient } from '@angular/common/http';
+import { environment as env } from '../../../environments/environment';
 
 @Component({
   selector: 'app-movie-list',
@@ -28,8 +30,10 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
   // Constructor (get all movies)
   constructor(public dialog: MatDialog,
     private ref: ChangeDetectorRef,
-    private moviesClient: MoviesClient
+    private moviesClient: MoviesClient,
+    private http: HttpClient
   ) {
+    this.moviesClient = new MoviesClient(http,`${env.dev.serverUrl}`);
     // Init datasource
     this.dataSource = new MatTableDataSource(this.movies);
     // Get data from api
@@ -107,7 +111,7 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
               width: '400px',
               data: "Register movie failed."
             });
-            
+
           }
         );
       }
@@ -138,7 +142,7 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
                 //this.movies = this.vm.lists.map(item => item);
                 this.dataSource = new MatTableDataSource(this.vm.lists);
               }
-              
+
               this.dialog.open(ComnfirmDialogComponent, {
                 width: '400px',
                 data: "Movie updated."
