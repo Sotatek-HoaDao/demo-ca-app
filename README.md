@@ -36,3 +36,7 @@ https://www.youtube.com/watch?v=5OtUm1BLmG0
       "serverUrl": "url of web server (ex: https://localhost:44312)"
     }
    ```
+
+## Run api/spa separately
+- API: start debug
+- SPA: npm start or ng serve from terminal
