@@ -12,21 +12,21 @@ namespace demo_ca_app.WebUI.Controllers
     public class MoviesController : ApiControllerBase
     {
         [HttpGet]
-        [Authorize("read:movies")]
+        [Authorize("change:movies")]
         public async Task<ActionResult<MoviesVm>> Get()
         {
             return await Mediator.Send(new GetMoviesQuery());
         }
 
         [HttpPost]
-        [Authorize("update:movie")]
+        [Authorize("change:movies")]
         public async Task<ActionResult<int>> Create(CreateMovieCommand command)
         {
             return await Mediator.Send(command);
         }
 
         [HttpPut("{id}")]
-        [Authorize("update:movie")]
+        [Authorize("change:movies")]
         public async Task<ActionResult> Update(int id, UpdateMovieCommand command)
         {
             if (id != command.Id)
@@ -40,7 +40,7 @@ namespace demo_ca_app.WebUI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize("update:movie")]
+        [Authorize("change:movies")]
         public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteMovieCommand { Id = id });

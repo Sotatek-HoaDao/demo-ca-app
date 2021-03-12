@@ -50,7 +50,7 @@ namespace demo_ca_app.Infrastructure
             });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("read:movies", policy => policy.Requirements.Add(new HasScopeRequirement("read:movies", domain)));
+                options.AddPolicy("change:movies", policy => policy.Requirements.Add(new HasScopeRequirement("change:movies", domain)));
                 options.AddPolicy("update:movie", policy => policy.Requirements.Add(new HasScopeRequirement("update:movie", domain)));
             });
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();

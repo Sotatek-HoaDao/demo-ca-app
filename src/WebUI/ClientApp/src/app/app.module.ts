@@ -68,7 +68,7 @@ import { GraphQLModule } from './graphql.module';
     AuthModule.forRoot({
       ...env.auth,
       httpInterceptor: {
-        allowedList: [`${env.dev.serverUrl}/api/movies/`],
+        allowedList: [ `${env.dev.serverUrl}/*`],
       },}),
     LayoutModule,
     MatToolbarModule,
