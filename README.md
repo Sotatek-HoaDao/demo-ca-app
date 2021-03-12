@@ -40,3 +40,8 @@ https://www.youtube.com/watch?v=5OtUm1BLmG0
 ## Run api/spa separately
 - API: start debug
 - SPA: npm start or ng serve from terminal
+
+
+## Remaining Issues:
+	- Pagination of table
+	- How to secure graphql?
