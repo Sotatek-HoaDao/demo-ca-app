@@ -99,7 +99,6 @@ Refer links:
 	- Easier to switch to other DB (SQL Server, or MySQL, Postgresql
 	- Security?
 
-
 2.SQL Index
 	- Like index of the book
 	- Speed up data query, but slow down data input
@@ -107,7 +106,6 @@ Refer links:
 	- How to index
 		+ should: columns in where/join
 		+ should not: frequently update columns/large number of null value columns
-		
 3.DI
 
 5.CQRS
