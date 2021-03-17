@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { RatingType, RatingInputType } from '../../core/graphql';
 import {Apollo, gql} from 'apollo-angular';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,6 +6,7 @@ import { RatingDto } from 'src/app/web-api-client';
 import { MatDialog } from '@angular/material/dialog';
 import { RatingFormDialogComponent } from '../rating-form-dialog/rating-form-dialog.component';
 import { ComnfirmDialogComponent } from '../comnfirm-dialog/comnfirm-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-rating-list',
@@ -18,6 +19,7 @@ export class RatingListComponent implements OnInit {
   error: any;
   createdRating: any;
   updatedRating: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public displayedColumns: string[] = ['id', 'movieId', 'movieName', 'comment', 'ratingPoint', 'userMail'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
@@ -48,6 +50,7 @@ export class RatingListComponent implements OnInit {
         this.loading = result.loading;
         this.error = result.error;
         this.dataSource = new MatTableDataSource(this.ratings);
+        this.dataSource.paginator = this.paginator;
       });
   }
 
@@ -98,6 +101,7 @@ export class RatingListComponent implements OnInit {
           let newarr = [this.createdRating];
           let updatearr = this.ratings.concat(newarr);
           this.dataSource = new MatTableDataSource(updatearr);
+          this.dataSource.paginator = this.paginator;
           this.dialog.open(ComnfirmDialogComponent, {
             width: '400px',
             data: "Rating added."
@@ -179,6 +183,7 @@ export class RatingListComponent implements OnInit {
           }).subscribe(res => {
             let updatedArr = this.ratings.filter((item:RatingType) => item.id != id);
             this.dataSource = new MatTableDataSource(updatedArr);
+            this.dataSource.paginator = this.paginator;
             this.dialog.open(ComnfirmDialogComponent, {
                 width: '400px',
                 data: "Rating deleted."

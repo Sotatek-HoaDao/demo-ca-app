@@ -20,12 +20,11 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
   // attributes
   movies: MovieDto[] = [];
   vm: MoviesVm = new MoviesVm();
-  @ViewChild(MatPaginator)
-    paginator!: MatPaginator;
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // resultsLength = 0;
   public displayedColumns: string[] = ['id', 'name', 'description', 'duration'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
-  public dataSource: MatTableDataSource<MovieDto>;
+  public dataSource = new MatTableDataSource<MovieDto>(this.vm.lists);
 
   // Constructor (get all movies)
   constructor(public dialog: MatDialog,
@@ -43,6 +42,8 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
         if (this.vm && this.vm.lists && this.vm.lists.length) {
           this.movies = this.vm.lists;
           this.dataSource = new MatTableDataSource(this.vm.lists);
+          // this.resultsLength = this.vm.lists.length;
+          this.dataSource.paginator = this.paginator;
         }
       },
       error => console.error(error)
@@ -50,13 +51,15 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-    }
+    // this.dataSource.paginator = this.paginator;
+    // console.log(this.paginator);
+    // if (this.dataSource) {
+    //   this.dataSource.paginator = this.paginator;
+    // }
   }
 
   // Register new movie
@@ -97,6 +100,8 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
               this.vm.lists.push(movie);
               //this.movies = this.vm.lists;
               this.dataSource = new MatTableDataSource(this.vm.lists);
+              this.dataSource.paginator = this.paginator;
+              // this.resultsLength = this.vm.lists.length;
               this.dialog.open(ComnfirmDialogComponent, {
                 width: '400px',
                 data: "Movie registered."
@@ -141,6 +146,7 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
                 this.vm.lists[index] = result;
                 //this.movies = this.vm.lists.map(item => item);
                 this.dataSource = new MatTableDataSource(this.vm.lists);
+                this.dataSource.paginator = this.paginator;
               }
 
               this.dialog.open(ComnfirmDialogComponent, {
@@ -170,6 +176,9 @@ export class MovieListComponent implements OnInit, AfterViewInit  {
             if (this.vm && this.vm.lists) {
               this.vm.lists = this.vm.lists.filter(t => t.id != id)
               this.movies = this.vm.lists;
+              this.dataSource = new MatTableDataSource(this.vm.lists);
+              // this.resultsLength = this.vm.lists.length;
+              this.dataSource.paginator = this.paginator;
               this.dialog.open(ComnfirmDialogComponent, {
                 width: '400px',
                 data: "Movie deleted successfully."
