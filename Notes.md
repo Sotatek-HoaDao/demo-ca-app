@@ -98,7 +98,8 @@ Refer links:
 	- Easier to use (support easy to understand query, DB schema creation, DB query, DB manipulation)
 	- Easier to switch to other DB (SQL Server, or MySQL, Postgresql
 	- Security?
-	- 
+
+
 2.SQL Index
 	- Like index of the book
 	- Speed up data query, but slow down data input
