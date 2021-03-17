@@ -77,20 +77,16 @@
 
 Refer links:
 	Auth0:
-		`
 		https://auth0.com/
 		https://auth0.com/docs/architecture-scenarios/spa-api
 		https://github.com/auth0-samples/auth0-angular-samples
 		https://github.com/auth0-samples/auth0-aspnetcore-webapi-samples
-		`
 	Graphql
-		```
 		https://graphql.org/
 		https://github.com/graphql-dotnet/graphql-dotnet
 		https://github.com/graphql-dotnet/examples
 		https://code-maze.com/graphql-asp-net-core-tutorial/ <= Follow this turtorial
 		https://apollo-angular.com/docs/
-		```
 # Technical discussion
 1.Why using EF
 	- Easier to use (support easy to understand query, DB schema creation, DB query, DB manipulation)
