@@ -77,12 +77,12 @@
 
 Refer links:
 	Auth0:
-		```
+		`
 		https://auth0.com/
 		https://auth0.com/docs/architecture-scenarios/spa-api
 		https://github.com/auth0-samples/auth0-angular-samples
 		https://github.com/auth0-samples/auth0-aspnetcore-webapi-samples
-		```
+		`
 	Graphql
 		```
 		https://graphql.org/
